@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p>example</p>
+<script type="/text/jscript" src="app.js"></script>
+<script>
+var obj = new function() {
+    var map = new Map();
+    function stringify(){
+      return JSON.stringify([...map]);
+    }
+    function mitigate(){
+      let times=[];
+      for(var x = 0; x < 2; x++){
+        let keys = Array.from(map.keys()).reverse();
+        times[x] = keys[x];
+      }
+      if ((times[0] - times[1])>100){
+          append();
+      }
+    }
+    function append(){
+      if (localStorage.getItem("logs")===null){
+        localStorage.setItem("logs","");
+      }
+      if (localStorage.getItem("logs")===""){
+        localStorage.setItem("logs",stringify());
+      }
+      else{
+        let storage = localStorage.getItem("logs");
+        let appendbefore = storage.slice(0,-1);
+        let appendafter = stringify().replace("[",",");
+        localStorage.setItem("logs",(appendbefore+appendafter));
+      }
+      map = new Map();
+    }
+    function addMap(message,type){
+        let ticks = Date.now();
+        let date = new Date;
+        let entry = {
+          time: new Date(ticks),
+          message: message,
+          type: type
+        }
+        map.set((date.getDate().toString()
+        +date.getHours().toString()
+        +date.getMinutes().toString()
+        +date.getSeconds().toString()
+        +date.getMilliseconds().toString())
+        ,entry);
+        mitigate();
+    }
+    //PUBLIC METHODS
+    return {
+      log: function(message){
+        let a = performance.now();
+        addMap(message,"info");
+        var b = performance.now();
+        setTimeout(console.log.bind(console, '\n' + (b-a)));
+        return "";
+        //console.log((b - a));
+      },
+      err: function(message){
+        addMap(message,"error");
+      },
+      suc: function(message){
+        addMap(message,"success");
+      },
+      print:function(){
+        return map;
+      },
+      string: function(){
+        return stringify();
+      },
+      parse: function(){
+        let logs = localStorage.getItem("logs");
+        return new Map(JSON.parse(logs));
+      },
+      local: function(){
+        return localStorage.getItem("logs");
+      }
+    }
+}();
+function execute(){
+  for (var x = 0;x<1000;x++ ){
+    obj.log("dog");
+  }
+}
+//console.log();
+//console.log();
+</script>
+</body>
+</html>
