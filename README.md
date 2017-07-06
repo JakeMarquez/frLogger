@@ -19,6 +19,7 @@ Everything is encoded into Hexadecimal and then stored in localStorage, there ar
 convert hexadecimal stored values back into string form.
 
 # Methods
+Private methods are only accessible within the extension, Public methods can be accessed with the `fr` prefix (ie: `fr.log("dogs");`)
 * `stringify()` - private, returns the current map converted to JSON and then converted to Hexadecimal.
 * `hexEncode()` - private extension, returns a string converted to Hexadecimal.
 * `hexDecode()` - private extension, returns a Hexadecimal value converted to a string.
@@ -28,9 +29,9 @@ convert hexadecimal stored values back into string form.
   and add the new data. convert to JSON and Hexadecimal again and restore. If the current store is over 5000 entries, send it to the database. Reset the map.
 * `sendDate()` - private, INSERT YOUR DATA BASE LOGIC HERE --- this is whats called when we dump the user `localStorage`
 * `init()` - public, check to see if the user already has a store of logs more than 5000, send it if so. 
-* `log()` - public, add a log to `localStorage` under the type of "info"
-* `suc()` - public, add a log to `localStorage` under the type of "success"
-* `err()` - public, add a log to `localStorage` under the type of "error"
+* `log(string)` - public, add a log to `localStorage` under the type of "info"
+* `suc(string)` - public, add a log to `localStorage` under the type of "success"
+* `err(string)` - public, add a log to `localStorage` under the type of "error"
 * `showMap()` - public, consoles the current map
 * `decode()` - public, returns current map in Hexadecimal format
 * `parse()` - public, returns the current `localStorage` as a map
