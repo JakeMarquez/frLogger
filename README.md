@@ -22,10 +22,8 @@ convert hexadecimal stored values back into string form.
 *stringify() - private, returns the current map converted to JSON and then converted to Hexadecimal.
 *hexEncode() - private extension, returns a string converted to Hexadecimal.
 *hexDecode() - private extension, returns a Hexadecimal value converted to a string.
-*addMap(message,type) - private, adds an Entry to the current map using the key as a timestamp in the (DAYOFMONTH/HH/MM/SS/MS) format and the value as an object
-  containing a full time stamp, the message, and the type.
-*mitigate() - private, examines the current map to deduce if the program has logged more than once within a 1 second interval. to avoid un-necessary overhead
-  avoid interacting with localStorage until its been a full second. 
+*addMap(message,type) - private, adds an Entry to the current map using the key as a timestamp in the (DAYOFMONTH/HH/MM/SS/MS) format and the value as an object containing a full time stamp, the message, and the type.
+*mitigate() - private, examines the current map to deduce if the program has logged more than once within a 1 second interval. to avoid un-necessary overhead avoid interacting with localStorage until its been a full second. 
 *append() - private, if there is no localStorage create it and set it to the current map. If there is localStorage, parse the Hexadecimal and reconstruct the map
   and add the new data. convert to JSON and Hexadecimal again and restore. If the current store is over 5000 entries, send it to the database. Reset the map.
 *sendDate() - private, INSERT YOUR DATA BASE LOGIC HERE --- this is whats called when we dump the user localStorage
