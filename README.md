@@ -5,7 +5,7 @@ a simple js script to log information into local storage
 * Each major release is a number.
 * Each update to the current release is a decimal point.
 
-# Languages / Emcoding
+# Languages / Encoding
 * Ecmascript 6 (recomended)
 * Hexadecimal
 
